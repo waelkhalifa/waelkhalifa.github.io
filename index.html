@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>3D Vanity Addresses Visualization</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://cdn.jsdelivr.net/npm/three@0.106.2/build/three.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.106.2/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://threejs.org/examples/js/loaders/FontLoader.js"></script>
+</head>
+
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
+    background-size: cover;
+    backdrop-filter: brightness(50%);
+  }
+
+  canvas {
+    display: block;
+  }
+
+  #canvas_container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+</style>
+
+
+
+<body>
+<div id="canvas_container"></div>
+<script src="script.js"></script>
+</body>
+<script>
+    let renderer, scene, camera, sphereBg, nucleus, controls, textMesh;
+    let container = document.getElementById("canvas_container");
+    let noise = new SimplexNoise();
+
+    init();
+    animate();
+
+    function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(
+            65,
+            window.innerWidth / window.innerHeight,
+            0.01,
+            1000
+        );
+        camera.position.set(10, 10, 40);
+        camera.lookAt(10, 0, 0); // Resetting to look at the origin
+
+        // Ambient Light
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        // Directional Light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(50, 40, 40);
+        scene.add(directionalLight);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.autoRotate = true;
+
+        // Nucleus Material
+        const textureNucleus = new THREE.TextureLoader().load(
+            "https://images.pexels.com/photos/7099863/pexels-photo-7099863.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        );
+        let lambertMaterial = new THREE.MeshPhongMaterial({
+            map: textureNucleus,
+            shininess: 10, // Makes the nucleus more shiny
+            specular: 0xc97a5e // Specular highlights
+        });
+
+        // Text
+        const fontLoader = new THREE.FontLoader();
+        fontLoader.load(
+            "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
+            function (font) {
+                const textGeometry = new THREE.TextGeometry("0xY urs!", {
+                    font: font,
+                    size: 9,
+                    height: 3.5
+                });
+                textMesh = new THREE.Mesh(textGeometry, lambertMaterial);
+                textMesh.position.set(-20, -1, 0);
+                scene.add(textMesh);
+            }
+        );
+
+        // Sphere Background
+        const textureSphereBg = new THREE.TextureLoader().load(
+            "https://images.pexels.com/photos/3611882/pexels-photo-3611882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        );
+        textureSphereBg.anisotropy = 11;
+        let geometrySphereBg = new THREE.SphereBufferGeometry(50, 40, 40);
+        let materialSphereBg = new THREE.MeshBasicMaterial({
+            side: THREE.BackSide,
+            map: textureSphereBg
+        });
+        sphereBg = new THREE.Mesh(geometrySphereBg, materialSphereBg);
+        scene.add(sphereBg);
+
+        // Nucleus
+        let icosahedronGeometry = new THREE.IcosahedronGeometry(3, 4); // Increased resolution
+        nucleus = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+        nucleus.position.set(2, 2, 2);
+        scene.add(nucleus);
+    }
+
+    function animate() {
+        controls.update();
+
+        nucleus.geometry.vertices.forEach(function (v) {
+            let time = Date.now();
+            v.normalize();
+            let distance =
+                nucleus.geometry.parameters.radius +
+                noise.noise3D(v.x + time * 0.008, v.y + time * 0.02, v.z + time * 0.01);
+            v.multiplyScalar(distance);
+        });
+        nucleus.geometry.verticesNeedUpdate = true;
+        nucleus.geometry.normalsNeedUpdate = true;
+        nucleus.geometry.computeVertexNormals();
+        nucleus.geometry.computeFaceNormals();
+        nucleus.rotation.y += 0.04;
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+    }
+
+</script>
+</html>
