@@ -1,149 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>3D Vanity Addresses Visualization</title>
-	<link rel="stylesheet" href="styles.css">
-	<script src="https://cdn.jsdelivr.net/npm/three@0.106.2/build/three.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/three@0.106.2/examples/js/controls/OrbitControls.js"></script>
-	<script src="https://threejs.org/examples/js/loaders/FontLoader.js"></script>
+	<title>Wael Khalifa</title>
+	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, minimum-scale=1">
+	<meta name="description" content="Maker. Builder. Dreamer.">
+	<meta http-equiv="X-UA-Compatible" content="">
+	<meta property="og:site_name" content="Wael Khalifa - Maker. Builder. Dreamer.">
+	<meta property="og:title" content="Wael Khalifa">
+	<meta property="og:type" content="Maintenance">
+	<meta property="og:url" content="http://waelkh.me">
+	<meta property="og:description" content="This site has been stale for awhile. I'm making it better. Stay tuned.">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="stylesheet" id="mtnc-style-css"
+	      href="https://jeffreysambells.com/wp-content/plugins/maintenance/load/css/style.css?ver=1680925254" media="all">
+	<link rel="stylesheet" id="mtnc-fonts-css"
+	      href="https://jeffreysambells.com/wp-content/plugins/maintenance/load/css/fonts.css?ver=1680925254" media="all">
+	<style type="text/css">
+    body {
+      background-color: #111111
+    }
+
+    .preloader {
+      background-color: #111111
+    }
+
+    body {
+      font-family: Open Sans;
+    }
+
+	</style>
+	<!--[if IE]>
+	<style type="text/css">
+
+	</style>
+	<![endif]-->
+	<link rel="stylesheet"
+	      href="https://fonts.bunny.net/css?family=Open%20Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic:300">
+	<style id="_goober"> .go1475592160 {
+    height: 0;
+  }
+
+  .go1671063245 {
+    height: auto;
+  }
+
+  .go1888806478 {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+  }
+
+  @media (min-width: 600px) {
+    .go1888806478 {
+      flex-grow: initial;
+      min-width: 288px;
+    }
+  }
+
+  .go167266335 {
+    background-color: #313131;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    color: #fff;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  .go3162094071 {
+    padding-left: 20px;
+  }
+
+  .go3844575157 {
+    background-color: #313131;
+  }
+
+  .go1725278324 {
+    background-color: #43a047;
+  }
+
+  .go3651055292 {
+    background-color: #d32f2f;
+  }
+
+  .go4215275574 {
+    background-color: #ff9800;
+  }
+
+  .go1930647212 {
+    background-color: #2196f3;
+  }
+
+  .go946087465 {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  .go703367398 {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-left: 16px;
+    margin-right: -8px;
+  }
+
+  .go3963613292 {
+    width: 100%;
+    position: relative;
+    transform: translateX(0);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-width: 288px;
+  }
+
+  .go1141946668 {
+    box-sizing: border-box;
+    display: flex;
+    max-height: 100%;
+    position: fixed;
+    z-index: 1400;
+    height: auto;
+    width: auto;
+    transition: top 300ms ease 0ms, right 300ms ease 0ms, bottom 300ms ease 0ms, left 300ms ease 0ms, max-width 300ms ease 0ms;
+    pointer-events: none;
+    max-width: calc(100% - 40px);
+  }
+
+  .go1141946668 .notistack-CollapseWrapper {
+    padding: 6px 0px;
+    transition: padding 300ms ease 0ms;
+  }
+
+  @media (max-width: 599.95px) {
+    .go1141946668 {
+      width: 100%;
+      max-width: calc(100% - 32px);
+    }
+  }
+
+  .go3868796639 .notistack-CollapseWrapper {
+    padding: 2px 0px;
+  }
+
+  .go3118922589 {
+    top: 14px;
+    flex-direction: column;
+  }
+
+  .go1453831412 {
+    bottom: 14px;
+    flex-direction: column-reverse;
+  }
+
+  .go4027089540 {
+    left: 20px;
+  }
+
+  @media (min-width: 600px) {
+    .go4027089540 {
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 599.95px) {
+    .go4027089540 {
+      left: 16px;
+    }
+  }
+
+  .go2989568495 {
+    right: 20px;
+  }
+
+  @media (min-width: 600px) {
+    .go2989568495 {
+      align-items: flex-end;
+    }
+  }
+
+  @media (max-width: 599.95px) {
+    .go2989568495 {
+      right: 16px;
+    }
+  }
+
+  .go4034260886 {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media (min-width: 600px) {
+    .go4034260886 {
+      align-items: center;
+    }
+  }</style>
 </head>
 
-<style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-    background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
-    background-size: cover;
-    backdrop-filter: brightness(50%);
-  }
+<body class="maintenance">
 
-  canvas {
-    display: block;
-  }
+<div class="main-container">
+	<div class="preloader" style="display: none;">
+		<i class="fi-widget" aria-hidden="true"></i>
+	</div>
+	<div id="wrapper" style="visibility: visible;">
+		<div class="center logotype">
+			<header>
+				<div class="logo-box istext" rel="home"><h1 class="site-title">Wael Khalifa</h1></div>
+			</header>
+		</div>
+		<div id="content" class="site-content" style="position: absolute; top: 164.25px;">
+			<div class="center">
+				<h2 class="heading font-center"
+				    style="font-weight:300;font-style:normal">
+					Making It Better
+				</h2>
+				<div class="description" style="font-weight:300;font-style:normal">
+					<p>This site has been stale for a while. I'm making it better. Stay tuned.</p>
+				</div>
+			</div>
+		</div>
+	</div> <!-- end wrapper -->
+	<footer>
+		<div class="center">
+			<div style="font-weight:300;font-style:normal">
+				©2023 Wael Khalifa
+			</div>
+		</div>
+	</footer>
+	<picture class="bg-img">
+		<img src="https://jeffreysambells.com/wp-content/uploads/2020/05/mt-sample-background.jpg">
+	</picture>
+</div>
 
-  #canvas_container {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-</style>
-
-
-
-<body>
-<div id="canvas_container"></div>
-<script src="script.js"></script>
-</body>
-<script>
-    let renderer, scene, camera, sphereBg, nucleus, controls, textMesh;
-    let container = document.getElementById("canvas_container");
-    let noise = new SimplexNoise();
-
-    init();
-    animate();
-
-    function init() {
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(
-            65,
-            window.innerWidth / window.innerHeight,
-            0.01,
-            1000
-        );
-        camera.position.set(10, 10, 40);
-        camera.lookAt(10, 0, 0); // Resetting to look at the origin
-
-        // Ambient Light
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-
-        // Directional Light
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(50, 40, 40);
-        scene.add(directionalLight);
-
-        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        container.appendChild(renderer.domElement);
-
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.autoRotate = true;
-
-        // Nucleus Material
-        const textureNucleus = new THREE.TextureLoader().load(
-            "https://images.pexels.com/photos/7099863/pexels-photo-7099863.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        );
-        let lambertMaterial = new THREE.MeshPhongMaterial({
-            map: textureNucleus,
-            shininess: 10, // Makes the nucleus more shiny
-            specular: 0xc97a5e // Specular highlights
-        });
-
-        // Text
-        const fontLoader = new THREE.FontLoader();
-        fontLoader.load(
-            "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
-            function (font) {
-                const textGeometry = new THREE.TextGeometry("Wael World!", {
-                    font: font,
-                    size: 9,
-                    height: 3.5,
-                });
-                textMesh = new THREE.Mesh(textGeometry, lambertMaterial);
-                textMesh.position.set(-30, -15, 0);
-                scene.add(textMesh);
-            }
-        );
-
-        // Sphere Background
-        const textureSphereBg = new THREE.TextureLoader().load(
-            "https://images.pexels.com/photos/3611882/pexels-photo-3611882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        );
-        textureSphereBg.anisotropy = 11;
-        let geometrySphereBg = new THREE.SphereBufferGeometry(50, 40, 40);
-        let materialSphereBg = new THREE.MeshBasicMaterial({
-            side: THREE.BackSide,
-            map: textureSphereBg
-        });
-        sphereBg = new THREE.Mesh(geometrySphereBg, materialSphereBg);
-        scene.add(sphereBg);
-
-        // Nucleus
-        let icosahedronGeometry = new THREE.IcosahedronGeometry(3, 4); // Increased resolution
-        nucleus = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
-        nucleus.position.set(2, 2, 2);
-        scene.add(nucleus);
-    }
-
-    function animate() {
-        controls.update();
-
-        nucleus.geometry.vertices.forEach(function (v) {
-            let time = Date.now();
-            v.normalize();
-            let distance =
-                nucleus.geometry.parameters.radius +
-                noise.noise3D(v.x + time * 0.008, v.y + time * 0.02, v.z + time * 0.01);
-            v.multiplyScalar(distance);
-        });
-        nucleus.geometry.verticesNeedUpdate = true;
-        nucleus.geometry.normalsNeedUpdate = true;
-        nucleus.geometry.computeVertexNormals();
-        nucleus.geometry.computeFaceNormals();
-        nucleus.rotation.y += 0.04;
-
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-    }
-
+<!--[if lte IE 10]>
+<script src='https://jeffreysambells.com/wp-includes/js/jquery/jquery.min.js?ver=6.3.2' id='jquery_ie-js'></script>
+<![endif]-->
+<!--[if !IE]><!-->
+<script src="https://jeffreysambells.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.0" id="jquery-core-js"></script>
+<script src="https://jeffreysambells.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"
+        id="jquery-migrate-js"></script>
+<!--<![endif]-->
+<script id="_frontend-js-extra">
+    var mtnc_front_options = {
+        "body_bg": "https:\/\/jeffreysambells.com\/wp-content\/uploads\/2020\/05\/mt-sample-background.jpg",
+        "gallery_array": [],
+        "blur_intensity": "5",
+        "font_link": ["Open Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic:300"]
+    };
 </script>
+<script src="https://jeffreysambells.com/wp-content/plugins/maintenance/load/js/jquery.frontend.js?ver=1680925254"
+        id="_frontend-js"></script>
+
+</body>
 </html>
+
